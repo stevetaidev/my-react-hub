@@ -1,31 +1,15 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+// App.jsx
+
+import React from 'react';
+import UserProvider from './UserProvider';
+import UserProfile from './UserProfile';
 
 function App() {
-
-  const [characterId, setCharacterId] = useState(1)
-
-  useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/${characterId}`)
-      .then(response => response.json)
-      .then(character => console.log(character))
-
-    return () => console.log('cleanup')
-  }, [characterId])
-
-
-  const handleCharacterId = () => {
-    setCharacterId(prevId => prevId + 1)
-  }
   return (
-    <>
-      <div>
-        <button onClick={handleCharacterId}>
-          Fetch Character by ID of {characterId}
-        </button>
-      </div>
-    </>
-  )
+    <UserProvider>
+      <UserProfile />
+    </UserProvider>
+  );
 }
 
-export default App
+export default App;
